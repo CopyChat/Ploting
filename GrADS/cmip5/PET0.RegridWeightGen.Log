@@ -1,0 +1,9 @@
+20150216 171755.762 INFO             PET0 Running with ESMF Version 6.3.0rp1
+20150216 172430.152 INFO             PET0 Running with ESMF Version 6.3.0rp1
+20150216 172430.154 ERROR            PET0 ESMF_RegridWeightGen.F90:1441 ESMF_RegridWeightGenFile Library needed by ESMF not present - - ESMF_NETCDF not defined when lib was compiled
+20150216 175943.766 INFO     PET0 Running with ESMF Version 5.2.0rp2
+20150216 175943.818 ERROR    PET0 ESMF_IOScrip.F90:141 ESMF_ScripInq netCDF Status Return Error
+20150216 180639.934 INFO     PET0 Running with ESMF Version 5.2.0rp2
+20150216 180639.938 ERROR    PET0 ESMF_IOScrip.F90:141 ESMF_ScripInq netCDF Status Return Error
+20150216 180640.974 INFO     PET0 Running with ESMF Version 5.2.0rp2
+20150216 180640.979 ERROR    PET0 ESMF_IOScrip.F90:141 ESMF_ScripInq netCDF Status Return Error

@@ -1,0 +1,206 @@
+#eload "setup_ps"
+#set output "doo_p.ps"
+#set terminal postscript portrait
+reset
+
+#set term X11
+
+set terminal postscript eps enhanced color font 'Helvetica,16'
+set output 'flux.eps'
+#
+set size 1.2,1.2
+set datafile commentschars "#%"
+set datafile separator " "
+set grid
+set tics scale 2
+
+
+set style line 1 lt 1 lc rgb "red" lw 4
+set style line 2 lt 1 lc rgb "black" lw 1
+set style line 3 lt 1 lc rgb "green" lw 2
+set style line 4 lt 1 lc rgb "brown" lw 2
+
+#set title "Simple Plots" font ",20"
+#set label "yield point" at 0.003, 260
+set key right nobox
+#TITLE="`head -1 force.dat | awk '{print $2}'`"
+
+set xtics font "Times-Roman, 18" 
+set ytics font "Times-Roman, 18" 
+#--------------------------------------------------- 
+OBSdata='OBSData2plot'
+
+swuflx='swuflx.dat'
+swdflx='swdflx.dat'
+swuflxc='swuflxc.dat'
+swdflxc='swdflxc.dat'
+swhr='swhr.dat'
+swhrc='swhrc.dat'
+
+#set xdata time
+#set timefmt "%Y-%m-%dT%H:%M:%S"
+#set timefmt "%Y-%m"
+#set format x "%Y-%m"
+#plot Modeldata using 1:2 with linespoints ls 1 lt 4
+#
+#set xrange [0:100]
+InputDir="/Users/tang/climate/Modeling/ICTP/RRTM_TEST"
+
+#=================================================== 
+#--------------------------------------------------- 
+# set style of the plot
+set xlabel "W/m2" font ",12" offset 0.8,0.8
+set ylabel "pressure level" font ",12" offset 2,0.2
+set key font ",12"
+set ytics font ",12"
+#set ytics rotate
+#set xtics rotate by 45 offset -2.8,-2.8
+
+#=================================================== 1
+set multiplot layout 3,3 \
+        font ",16"
+        #font ",16" offset 0,-0.05
+#set xtics rotate
+set bmargin 5
+set key inside
+set size 0.35,0.45
+set xtics font ",12" offset 0.51,0.51
+set grid
+set xrange [70:200]
+set title "09:00:00" offset -0.5,-0.5 
+#unset key
+plot swuflx using 2:1 with linespoints ls 1 title "swuflx",\
+    swuflxc using 2:1 with linespoints ls 3 title "swuflxc"
+    #swdflx using 2:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 2:1 with linespoints ls 4 title "swdflxc"
+    
+
+set size 0.35,0.45
+set grid
+set title "09:00:00" offset -0.5,-0.5
+set xrange [300:1400]
+#unset key
+plot swdflx using 2:1 with linespoints ls 1 title "swdflx",\
+    swdflxc using 2:1 with linespoints ls 3 title "swdflxc"
+    #swdflx using 3:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 3:1 with linespoints ls 4 title "swdflxc"
+
+set size 0.35,0.45
+set grid
+set title "09:00:00" offset -0.5,-0.5
+set xrange [0:10]
+#unset key
+plot swhr using 2:1 with linespoints ls 1 title "swhr",\
+    swhrc using 2:1 with linespoints ls 3 title "swhrc"
+    #swdflx using 3:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 3:1 with linespoints ls 4 title "swdflxc"
+#
+set size 0.35,0.45
+set grid
+set title "12:00:00" offset -0.5,-0.5
+set xrange [70:200]
+#unset key
+plot swuflx using 3:1 with linespoints ls 1 title "swuflx",\
+    swuflxc using 3:1 with linespoints ls 3 title "swuflxc"
+    #swdflx using 4:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 4:1 with linespoints ls 4 title "swdflxc"
+
+
+set size 0.35,0.45
+set grid
+set title "12:00:00" offset -0.5,-0.5
+set xrange [300:1400]
+#unset key
+plot swdflx using 3:1 with linespoints ls 1 title "swdflx",\
+    swdflxc using 3:1 with linespoints ls 3 title "swdflxc"
+    #swdflx using 4:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 4:1 with linespoints ls 4 title "swdflxc"
+#
+#
+#
+set size 0.35,0.45
+set grid
+set title "12:00:00" offset -0.5,-0.5
+set xrange [0:10]
+#unset key
+plot swhr using 3:1 with linespoints ls 1 title "swhr",\
+    swhrc using 3:1 with linespoints ls 3 title "swhrc"
+    #swdflx using 3:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 3:1 with linespoints ls 4 title "swdflxc"
+
+
+set size 0.35,0.45
+set grid
+set title "15:00:00" offset -0.5,-0.5
+#unset key
+set xrange [70:200]
+plot swuflx using 4:1 with linespoints ls 1 title "swuflx",\
+    swuflxc using 4:1 with linespoints ls 3 title "swuflxc"
+    #swdflx using 5:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 5:1 with linespoints ls 4 title "swdflxc"
+
+
+set size 0.35,0.45
+set grid
+set title "15:00:00" offset -0.5,-0.5
+set xrange [300:1400]
+#unset key
+plot swdflx using 4:1 with linespoints ls 1 title "swdflx",\
+    swdflxc using 4:1 with linespoints ls 3 title "swdflxc"
+    #swdflx using 6:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 6:1 with linespoints ls 4 title "swdflxc"
+
+set size 0.35,0.45
+set grid
+set title "15:00:00" offset -0.5,-0.5
+set xrange [0:10]
+#unset key
+plot swhr using 4:1 with linespoints ls 1 title "swhr",\
+    swhrc using 4:1 with linespoints ls 3 title "swhrc"
+    #swdflx using 3:1 with linespoints ls 2 title "swdflx",\
+    #swdflxc using 3:1 with linespoints ls 4 title "swdflxc"
+
+#set size 0.35,0.45
+#set grid
+#set title "21:00:00" offset -0.5,-0.5
+#unset key
+#plot swuflx using 7:1 with linespoints ls 1 title "swuflx",\
+    ##swdflx using 7:1 with linespoints ls 2 title "swdflx",\
+    #swuflxc using 7:1 with linespoints ls 3 title "swuflxc",\
+    ##swdflxc using 7:1 with linespoints ls 4 title "swdflxc"
+
+
+#set size 0.35,0.45
+#set grid
+#set title "00:00:00" offset -0.5,-0.5
+#unset key
+#plot swuflx using 8:1 with linespoints ls 1 title "swuflx",\
+    ##swdflx using 8:1 with linespoints ls 2 title "swdflx",\
+    #swuflxc using 8:1 with linespoints ls 3 title "swuflxc",\
+    ##swdflxc using 8:1 with linespoints ls 4 title "swdflxc"
+
+unset multiplot
+
+pause -1 "Hit any key to continue"
+
+
+
+
+
+        #model01 using 1:2 with linespoints ls 2 title "RegCM output Grell 0-1",\
+        #model05 using 1:2 with linespoints ls 3 title "RegCM output Grell 0.-0.5",\
+        #model51 using 1:2 with linespoints ls 4 title "RegCM output Grell 0.5-1"
+
+        #cos(x-.4)  lt -1 pi -3 pt 4 title 'pi -3',
+#reset
+#set xdata time
+#set timefmt "%Y-%m-%dT%H:%M:%S"
+#set format x "%Y-%m"
+#plot OBSdata using 1:2 with linespoints ls 1 lt 4
+#title columnheader(2)
+#set xrange ['"2002-01"' to '"2012-07"']
+
+#=================================================== 
+#set yrange [1000 to 1015 ]
+#set xrange ['"2001-01-01T12:00:00"' to '"2005-12-30T12:00:00"']
+#plot "<(sed -n '2,242p' RRTMG_SW_clr_reunion.dat)" using 1:3 with linespoints ls 1 lt 2 

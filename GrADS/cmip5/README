@@ -1,0 +1,59 @@
+This directory contains a Power Point Presentation given at the AMS
+Annual Meeting in January, 2013 that presents a workflow for acquiring
+and managing CMIP5 data.
+
+Included in the workflow are some scripts to make the CMIP5 data
+friendly for GrADS. These scripts and other utilities work for me but
+your mileage may vary -- you will certainly have to adjust path names
+to match your own data management conventions. A brief description of
+how I organize things is in the PPT presentation. You will also have
+to acquire and build the NetCDF library, the NetCDF operators, and the
+ESMF_RegridWeightGen utility. Please ask the providers for help with
+these tasks. The two C programs are straightforward to build, please
+see comments in the programs and scripts for further documentation. 
+
+
+A brief descriptor of files in this directory follows:
+
+AMS2013.pptx     == The PPT Presentation
+dummy_365day.ctl == dummy descriptor file used by write_xtl.gs and write_ctl.gs
+dummy_day.ctl    == dummy descriptor file used by write_xtl.gs and write_ctl.gs
+dummy_mon.ctl    == dummy descriptor file used by write_xtl.gs and write_ctl.gs
+dummy_stub.ctl   == dummy descriptor file used by write_xtl.gs and write_ctl.gs
+dummy.dat        == 0-byte file that appears in the DSET entry of dummy*.ctl
+get_basin.sh     == shell script to get the size of the basin dimension from a CMIP5 file
+get_calendar.sh  == shell script to get the calendar attribute value from a CMIP5 file
+isfile.sh*       == shell script to determine if a file exists
+linear0p5.nc     == netcdf file that describes the destination grid for ESMF_RegridWeightGen (SCRIP format)
+weights2pdef.c   == C program to convert interpolation weights into a PDEF file for use with GrADS
+wordof.c         == C program for parsing strings, called by get_basin.sh and get_calendar.sh
+write_xtl.gs     == GrADS script to generate xdfopen-style descriptors for CMIP5 data
+write_ctl.gs     == GrADS script to generate full descriptors and PDEF files for CMIP5 data on non-rectilinear grids
+
+
+You will also need:
+  ncdump (a utility in the NetCDF library), 
+  ncks (a Netcdf Operator)
+  ESFM_RegridWeightGen (a utility in the ESMF software package)
+
+NetCDF Library Home Page:
+  http://www.unidata.ucar.edu/software/netcdf/
+
+NetCDF Operator Home Page:
+  http://nco.sourceforge.net/
+
+Download ESMF Software:
+  http://www.earthsystemmodeling.org/download/index.shtml
+
+Documentation for ESMF_RegridWeightGen:
+  http://www.earthsystemmodeling.org/esmf_releases/public/ESMF_5_2_0rp2/ESMF_refdoc/node3.html#SECTION03020000000000000000
+
+
+Much of this code is glorified string parsing. I know there are many
+ways to do this, and what is presented here may not be the best or most 
+efficient, is it merely what was easiest for me. 
+
+
+--Jennifer Adams <jma@iges.org>
+
+
