@@ -185,7 +185,7 @@ TITLE='"biases vs 'OBSproj' of 'Plotvar'"'
 *** sumer 2001-2002
 
 * output dir
-ICTP='/Users/ctang/climate/Modeling/MPI-test/output_1/pprcmdata/monthly'
+ICTP='/Users/ctang/climate/Modeling/MPI-test/output_2/pprcmdata/monthly'
 
 
 * title of subplot
