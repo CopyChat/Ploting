@@ -23,8 +23,11 @@ OBSproj.2='CMAP'
 OBSproj.2='GPCP'
 
 OBSproj.3='CERES'
+OBSproj.3='CM_SAF'
+
 OBSproj.4='MODIS'
 OBSproj.4='CM_SAF'
+
 OBSproj.5='CERES'
 
 OBSproj.6='ERA_Interim'
@@ -68,8 +71,12 @@ endif
 
 
 if(OBSproj.3='CERES')
-*  OBSvar.3='rsds'
   OBSvar.3='sfc_sw_down_all'
+  OBScrs.3='1'
+  OBSpls.3='0'
+endif
+if(OBSproj.3='CM_SAF')
+  OBSvar.3='sis'
   OBScrs.3='1'
   OBSpls.3='0'
 endif
@@ -333,8 +340,14 @@ while(j<=jmax)
       'sdfopen 'OBSDIR'/TRMM/TRMM.hrf.ymon.mean.'YEARtag'.'monthlab'.nc'
     endif
     if(OBSproj.j='CM_SAF')
-      say 'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.2001-2002.ymon.mean.NDJFMA.nc'
-      'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.2001-2002.ymon.mean.NDJFMA.nc'
+      if(OBSvar.j='cfc')
+      say 'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.2001-2002.ymon.mean.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.'YEARtag'.ymon.mean.'monthlab'.nc'
+      endif
+      if(OBSvar.j='sis')
+      'sdfopen 'OBSDIR'/CM_SAF/SIS/SISmm.199901-200710.'YEARtag'.ymon.mean.'monthlab'.nc'
+      say 'sdfopen 'OBSDIR'/CM_SAF/SIS/SISmm.199901-200710.'YEARtag'.ymon.mean.'monthlab'.nc'
+      endif
     endif
     if(OBSproj.j='CRU')
       'sdfopen 'OBSDIR'/CRU/3.20/cru_ts3.20.tmp.ymon.mean.'YEARtag'.'monthlab'.nc'
@@ -497,7 +510,7 @@ while(j<=jmax)
 
   'cbarn 0.45 0 5.5 2.16'
 * ----------------------------- to draw mean bias
-  'd aave(obsave,lon=0,lon=110,lat=-37,lat=-3)'
+  'd aave(obsstd,lon=0,lon=110,lat=-37,lat=-3)'
   meanbias1=sublin(result,1)
   meanbias = subwrd(meanbias1,4)
 *  meanbias = math_nint(meanbias1)
@@ -578,7 +591,7 @@ while(j<=jmax)
 
   'drawstr -p 12 -k 2 -z 0.1 -t 'monthlab' -xo -0.2 -yo 0.1'
 * ----------------------------- to draw mean bias
-  'd aave(modave,global)'
+  'd aave(forcestd,global)'
   meanbias1=sublin(result,1)
   meanbias = subwrd(meanbias1,4)
 *  meanbias = math_nint(meanbias1)
