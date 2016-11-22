@@ -23,10 +23,14 @@ OBSproj.2='CMAP'
 OBSproj.2='GPCP'
 
 OBSproj.3='CERES'
+OBSproj.3='ERA_Interim'
 OBSproj.3='CM_SAF'
+OBSproj.3='NCEP-NCAR'
 
 OBSproj.4='MODIS'
+OBSproj.4='CERES'
 OBSproj.4='CM_SAF'
+OBSproj.4='ERA_Interim'
 
 OBSproj.5='CERES'
 
@@ -80,6 +84,11 @@ if(OBSproj.3='CM_SAF')
   OBScrs.3='1'
   OBSpls.3='0'
 endif
+if(OBSproj.3='NCEP-NCAR')
+  OBSvar.3='dswrf'
+  OBScrs.3='1'
+  OBSpls.3='0'
+endif
 
 
 if(OBSproj.4='MODIS')
@@ -90,6 +99,11 @@ endif
 if(OBSproj.4='CM_SAF')
   OBSvar.4='cfc'
   OBScrs.4='1'
+  OBSpls.4='0'
+endif
+if(OBSproj.4='ERA_Interim')
+  OBSvar.4='tcc'
+  OBScrs.4='100'
   OBSpls.4='0'
 endif
 
@@ -317,8 +331,13 @@ while(j<=jmax)
       if(OBSvar.j='t2m')
         'sdfopen 'OBSDIR'/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
         say 'sdfopen 'OBSDIR'/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
-      else
+      endif
+      if(OBSvar.j='tp')
         'sdfopen 'OBSDIR'/ERA_Interim/ERA.tp.ymon.mean.'YEARtag'.'monthlab'.nc'
+      endif
+      if(OBSvar.j='tcc')
+        'sdfopen 'OBSDIR'/ERA_Interim/ERA.clt.mon.mean.1979-2015.'YEARtag'.ymon.mean.'monthlab'.nc'
+        say 'sdfopen 'OBSDIR'/ERA_Interim/ERA.clt.mon.mean.1979-2015.'YEARtag'.ymon.mean.'monthlab'.nc'
       endif
     endif
     if(OBSproj.j='GPCP')
@@ -356,6 +375,10 @@ while(j<=jmax)
     if(OBSproj.j='MODIS')
       say 'sdfopen 'OBSDIR'/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
       'sdfopen 'OBSDIR'/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
+    endif
+    if(OBSproj.j='NCEP-NCAR')
+      say 'sdfopen 'OBSDIR'/NCEP-NCAR/dswrf.sfc.gauss.2001-2002.'YEARtag'.ymon.mean.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/NCEP-NCAR/dswrf.sfc.gauss.2001-2002.'YEARtag'.ymon.mean.'monthlab'.nc'
     endif
 
     'set dfile 1'
