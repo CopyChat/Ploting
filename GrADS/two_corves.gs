@@ -38,8 +38,8 @@ say 'sdfopen 'inputf1''
 * y axis is drawn white, thick and labels have size 0.20
 'set ylopts 1 6 0.20'
 
-* x axis is drawn blue, thin and labels have size 0.15
-'set xlopts 4 1 0.15'
+* x axis is drawn blue, thick and labels have size 0.15
+'set xlopts 4 6 0.20'
 'd rsds'
 *'d tloop(aave(cvlh*86400,lon=-70,lon=-50,lat=-15,lat=0))'
 
@@ -75,3 +75,7 @@ say 'sdfopen 'inputf1''
 
 
 *================ save
+'save 'OUTPUT''
+say 'open 'OUTPUT'.eps'
+'! killapp Preview'
+'! open 'OUTPUT'.eps'

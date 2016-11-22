@@ -13,6 +13,8 @@
 * 1, whether plot OBS
 obs=1 
 
+OBSDIR='/Users/ctang/climate/GLOBALDATA/OBSDATA'
+
 OBSproj.1='GHCN'
 OBSproj.1='CRU'
 OBSproj.1='ERA_Interim'
@@ -22,7 +24,9 @@ OBSproj.2='GPCP'
 
 OBSproj.3='CERES'
 OBSproj.4='MODIS'
-OBSproj.5='ERA_Interim'
+OBSproj.4='CM_SAF'
+OBSproj.5='CERES'
+
 OBSproj.6='ERA_Interim'
 OBSproj.7='ERA_Interim'
 
@@ -76,12 +80,18 @@ if(OBSproj.4='MODIS')
   OBScrs.4='1'
   OBSpls.4='0'
 endif
-
-if(OBSproj.5='ERA_Interim')
-    OBSvar.5='t2m'
-    OBScrs.5='1'
-    OBSpls.5='-273.5'
+if(OBSproj.4='CM_SAF')
+  OBSvar.4='cfc'
+  OBScrs.4='1'
+  OBSpls.4='0'
 endif
+
+if(OBSproj.5='CERES')
+    OBSvar.5='lwp_total_mon'
+    OBScrs.5='1'
+    OBSpls.5='1'
+endif
+
 if(OBSproj.6='ERA_Interim')
     OBSvar.6='t2m'
     OBScrs.6='1'
@@ -125,14 +135,14 @@ Forcepls.7='-273.5'
 *=============================== RegCM data
 RCMtag='MPI_hist'
 YEARtag='2001-2002'
-RCMDIR='/Users/ctang/climate/Modeling/MPI-test/output_1/pprcmdata/monthly'
+RCMDIR='/Users/ctang/climate/Modeling/MPI-test/output_4/pprcmdata/monthly'
 
 * RegCM Variable to be ploted
 Plotvar.1='TEMP'
 Plotvar.2='Precip'
 Plotvar.3='SWD'
 Plotvar.4='TCC'
-Plotvar.5='TEMP'
+Plotvar.5='LWP'
 Plotvar.6='TEMP'
 Plotvar.7='TEMP'
 
@@ -141,7 +151,7 @@ Unit.1='degC'
 Unit.2='mm/day'
 Unit.3='W/m2'
 Unit.4='%'
-Unit.5='degC'
+Unit.5='g m-2'
 Unit.6='degC'
 Unit.7='degC'
 
@@ -150,7 +160,7 @@ RegCMtag.1='SRF'
 RegCMtag.2='SRF'
 RegCMtag.3='SRF'
 RegCMtag.4='RAD'
-RegCMtag.5='SRF'
+RegCMtag.5='RAD'
 RegCMtag.6='SRF'
 RegCMtag.7='SRF'
 
@@ -159,7 +169,7 @@ Modelvar.1='s01tas'
 Modelvar.2='pr'
 Modelvar.3='rsds'
 Modelvar.4='clt'
-Modelvar.5='s01tas'
+Modelvar.5='clw'
 Modelvar.6='s01tas'
 Modelvar.7='s01tas'
 
@@ -177,7 +187,7 @@ Modelpls.1='-273.5'
 Modelpls.2='0'
 Modelpls.3='0'
 Modelpls.4='1'
-Modelpls.5='-273.5'
+Modelpls.5='0'
 Modelpls.6='-273.5'
 Modelpls.7='-273.5'
 
@@ -219,8 +229,8 @@ endif
   obsmax.3=320
   obsmin.4=0
   obsmax.4=100
-  obsmin.5=0
-  obsmax.5=30
+  obsmin.5=10
+  obsmax.5=80
   obsmin.6=0
   obsmax.6=30
   obsmin.7=0
@@ -235,7 +245,7 @@ endif
   stdmin.4=0
   stdmax.4=50
   stdmin.5=0
-  stdmax.5=1
+  stdmax.5=10
   stdmin.6=0
   stdmax.6=1
   stdmin.7=0
@@ -298,31 +308,41 @@ while(j<=jmax)
 ****** BEGIN read OBS data 
     if(OBSproj.j='ERA_Interim')
       if(OBSvar.j='t2m')
-        'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
-        say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
+        'sdfopen 'OBSDIR'/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
+        say 'sdfopen 'OBSDIR'/ERA_Interim/ERA.t2m.ymon.mean.'YEARtag'.'monthlab'.nc'
       else
-        'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/ERA_Interim/ERA.tp.ymon.mean.'YEARtag'.'monthlab'.nc'
+        'sdfopen 'OBSDIR'/ERA_Interim/ERA.tp.ymon.mean.'YEARtag'.'monthlab'.nc'
       endif
     endif
     if(OBSproj.j='GPCP')
-      say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/GPCP/precip.ymon.mean.'YEARtag'.'monthlab'.nc'
-      'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/GPCP/precip.ymon.mean.'YEARtag'.'monthlab'.nc'
+      say 'sdfopen 'OBSDIR'/GPCP/precip.ymon.mean.'YEARtag'.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/GPCP/precip.ymon.mean.'YEARtag'.'monthlab'.nc'
     endif
     if(OBSproj.j='CERES')
-      say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/CERES/CERES_EBAF-Surface_Ed2.7_Subset.ymon.mean.'YEARtag'.'monthlab'.nc'
-      'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/CERES/CERES_EBAF-Surface_Ed2.7_Subset.ymon.mean.'YEARtag'.'monthlab'.nc'
+      if(OBSvar.j='sfc_sw_down_all')
+        say 'sdfopen 'OBSDIR'/CERES/CERES_EBAF-Surface_Ed2.7_Subset.ymon.mean.'YEARtag'.'monthlab'.nc'
+        'sdfopen 'OBSDIR'/CERES/CERES_EBAF-Surface_Ed2.7_Subset.ymon.mean.'YEARtag'.'monthlab'.nc'
+      endif
+      if(OBSvar.j='lwp_total_mon')
+        say 'sdfopen 'OBSDIR'/CERES/CERES_SYN1deg-Month_Terra-Aqua-MODIS_Ed3A_Subset_'YEARtag'.ymon.mean.'monthlab'.nc'
+        'sdfopen 'OBSDIR'/CERES/CERES_SYN1deg-Month_Terra-Aqua-MODIS_Ed3A_Subset_'YEARtag'.ymon.mean.'monthlab'.nc'
+      endif
     endif
     if(OBSproj.j='TRMM')
-      say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/TRMM/TRMM.hrf.ymon.mean.'YEARtag'.'monthlab'.nc'
-      'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/TRMM/TRMM.hrf.ymon.mean.'YEARtag'.'monthlab'.nc'
+      say 'sdfopen 'OBSDIR'/TRMM/TRMM.hrf.ymon.mean.'YEARtag'.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/TRMM/TRMM.hrf.ymon.mean.'YEARtag'.'monthlab'.nc'
+    endif
+    if(OBSproj.j='CM_SAF')
+      say 'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.2001-2002.ymon.mean.NDJFMA.nc'
+      'sdfopen 'OBSDIR'/CM_SAF/CFC/CFCmm.200001-200912.GL.2001-2002.ymon.mean.NDJFMA.nc'
     endif
     if(OBSproj.j='CRU')
-      'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/CRU/3.20/cru_ts3.20.tmp.ymon.mean.'YEARtag'.'monthlab'.nc'
-      say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/CRU/3.20/cru_ts3.20.tmp.ymon.mean.'YEARtag'.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/CRU/3.20/cru_ts3.20.tmp.ymon.mean.'YEARtag'.'monthlab'.nc'
+      say 'sdfopen 'OBSDIR'/CRU/3.20/cru_ts3.20.tmp.ymon.mean.'YEARtag'.'monthlab'.nc'
     endif
     if(OBSproj.j='MODIS')
-      say 'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
-      'sdfopen /Users/ctang/climate/GLOBALDATA/OBSDATA/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
+      say 'sdfopen 'OBSDIR'/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
+      'sdfopen 'OBSDIR'/MODIS/clt/clt_MODIS_L3_C5_200101-200212.ymon.mean.'monthlab'.nc'
     endif
 
     'set dfile 1'
