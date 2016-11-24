@@ -15,14 +15,14 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import matplotlib.lines as lines
-from mpl_toolkits.basemap import Basemap , addcyclic
+#from mpl_toolkits.basemap import Basemap , addcyclic
 from matplotlib.colors import LinearSegmentedColormap
 import textwrap
 
 pl.close('all')
 
 ########################## for CMIP5 charactors
-DIR='/Users/tang/climate/CMIP5/monthly/rsds/'
+DIR='/Users/ctang/climate/CMIP5/monthly/rsds/'
 VARIABLE='rsds'
 PRODUCT='Amon'
 ENSEMBLE='r1i1p1'
@@ -296,9 +296,9 @@ plt.text(2029,8,str(K)+' CMIP5 models',size=16,rotation=0.,
 
 # for Had
 
-Had_dir1="/Users/tang/climate/Modeling/333/Had.G71E0001/output/pprcmdata/monthly/"
-Had_dir2="/Users/tang/climate/Modeling/333/Had.G71E0001/output.RCP85.2044-2055/pprcmdata/monthly/"
-Had_dir3="/Users/tang/climate/Modeling/333/Had.G71E0001/output.RCP85.2088-2100/pprcmdata/monthly/"
+Had_dir1="/Users/ctang/climate/Modeling/333/Had.G71E0001/output/pprcmdata/monthly/"
+Had_dir2="/Users/ctang/climate/Modeling/333/Had.G71E0001/output.RCP85.2044-2055/pprcmdata/monthly/"
+Had_dir3="/Users/ctang/climate/Modeling/333/Had.G71E0001/output.RCP85.2088-2100/pprcmdata/monthly/"
 
 infile1=Had_dir1+'Had_hist.SRF.all.year.fldmean.1996-2005.nc'
 infile2=Had_dir2+'Had_rcp85.SRF.all.year.fldmean.2046-2055.nc'
@@ -350,9 +350,9 @@ plt.plot(YEAR3,TEMP3,color="blue",linewidth=6,linestyle='-')
 # for GFDL
 
 
-GFDL_dir1="/Users/tang/climate/Modeling/333/GFDL.G71E0001/output/pprcmdata/monthly/"
-GFDL_dir2="/Users/tang/climate/Modeling/333/GFDL.G71E0001/output.RCP85.2044-2055/pprcmdata/monthly/"
-GFDL_dir3="/Users/tang/climate/Modeling/333/GFDL.G71E0001/output.RCP85.2088-2100/pprcmdata/monthly/"
+GFDL_dir1="/Users/ctang/climate/Modeling/333/GFDL.G71E0001/output/pprcmdata/monthly/"
+GFDL_dir2="/Users/ctang/climate/Modeling/333/GFDL.G71E0001/output.RCP85.2044-2055/pprcmdata/monthly/"
+GFDL_dir3="/Users/ctang/climate/Modeling/333/GFDL.G71E0001/output.RCP85.2088-2100/pprcmdata/monthly/"
 
 infile1=GFDL_dir1+'GFDL_hist.SRF.all.year.fldmean.1996-2005.nc'
 infile2=GFDL_dir2+'GFDL_rcp85.SRF.all.year.fldmean.2046-2055.nc'

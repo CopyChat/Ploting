@@ -28,7 +28,6 @@ import matplotlib.ticker as mtick
 import matplotlib.lines as lines
 import matplotlib.dates as dates
 from matplotlib.dates import YEARLY, DateFormatter, rrulewrapper, RRuleLocator, drange
-from mpl_toolkits.basemap import Basemap , addcyclic
 from matplotlib.colors import LinearSegmentedColormap
 import textwrap
 pl.close('all')
